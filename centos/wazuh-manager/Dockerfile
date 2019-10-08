@@ -30,7 +30,7 @@ RUN git clone https://github.com/wazuh/wazuh-documentation && cd /wazuh-document
 RUN pip3 install Sphinx==1.6.5 sphinx-rtd-theme==0.2.4 sphinxcontrib-images==0.7.0 sphinxprettysearchresults==0.3.5
 
 # install pip libraries for development
-RUN /var/ossec/framework/python/bin/pip3 install pytest defusedxml ptvsd pydevd-pycharm~=191.6605.12 freezegun
+RUN /var/ossec/framework/python/bin/pip3 install pytest ipython defusedxml ptvsd pydevd-pycharm~=191.6605.12 freezegun
 
 # install and configure Wazuh API
 RUN dnf install nodejs -y && npm config set user 0
