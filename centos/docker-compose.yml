@@ -7,12 +7,12 @@ services:
       args:
         wazuh_branch: "${WAZUH_BRANCH}"
         wazuh_api_branch: "${WAZUH_API_BRANCH}"
-    image: wazuh-manager-centos:3.10
+    image: wazuh-manager-centos:${WAZUH_BRANCH}
     volumes:
       - ./share:/share
-      - /home/druizz/Git/wazuh/framework/wazuh:/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-${WAZUH_VERSION}-py3.7.egg/wazuh:ro
-      - /home/druizz/Git/wazuh-api/test:/wazuh-api/test:ro
-      - /home/druizz/Git/wazuh-api/controllers:/var/ossec/api/controllers:ro
+      - ${WAZUH_SOURCES_PATH}/framework/wazuh:/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-${WAZUH_VERSION}-py3.7.egg/wazuh:ro
+      - ${WAZUH_API_SOURCES_PATH}/test:/wazuh-api/test:ro
+      - ${WAZUH_API_SOURCES_PATH}/controllers:/var/ossec/api/controllers:ro
     entrypoint:
       - /scripts/entrypoint.sh
       - ${MASTER_NAME}
@@ -24,12 +24,12 @@ services:
       args:
         wazuh_branch: "${WAZUH_BRANCH}"
         wazuh_api_branch: "${WAZUH_API_BRANCH}"
-    image: wazuh-manager-centos:3.10
+    image: wazuh-manager-centos:${WAZUH_BRANCH}
     volumes:
       - ./share:/share
-      - /home/druizz/Git/wazuh/framework/wazuh:/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-${WAZUH_VERSION}-py3.7.egg/wazuh:ro
-      - /home/druizz/Git/wazuh-api/test:/wazuh-api/test:ro
-      - /home/druizz/Git/wazuh-api/controllers:/var/ossec/api/controllers:ro
+      - ${WAZUH_SOURCES_PATH}/framework/wazuh:/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-${WAZUH_VERSION}-py3.7.egg/wazuh:ro
+      - ${WAZUH_API_SOURCES_PATH}/test:/wazuh-api/test:ro
+      - ${WAZUH_API_SOURCES_PATH}/controllers:/var/ossec/api/controllers:ro
     depends_on:
       - wazuh-master
     entrypoint:
@@ -43,12 +43,12 @@ services:
       args:
         wazuh_branch: "${WAZUH_BRANCH}"
         wazuh_api_branch: "${WAZUH_API_BRANCH}"
-    image: wazuh-manager-centos:3.10
+    image: wazuh-manager-centos:${WAZUH_BRANCH}
     volumes:
       - ./share:/share
-      - /home/druizz/Git/wazuh/framework/wazuh:/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-${WAZUH_VERSION}-py3.7.egg/wazuh:ro
-      - /home/druizz/Git/wazuh-api/test:/wazuh-api/test:ro
-      - /home/druizz/Git/wazuh-api/controllers:/var/ossec/api/controllers:ro
+      - ${WAZUH_SOURCES_PATH}/framework/wazuh:/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-${WAZUH_VERSION}-py3.7.egg/wazuh:ro
+      - ${WAZUH_API_SOURCES_PATH}/test:/wazuh-api/test:ro
+      - ${WAZUH_API_SOURCES_PATH}/controllers:/var/ossec/api/controllers:ro
     depends_on:
       - wazuh-master
     entrypoint:
@@ -59,7 +59,7 @@ services:
   wazuh-agent1:
     build:
       context: ./wazuh-agent
-    image: wazuh-agent-centos:3.10
+    image: wazuh-agent-centos:last-stable
     entrypoint: 
       - /scripts/entrypoint.sh 
       - wazuh-master
@@ -69,7 +69,7 @@ services:
   wazuh-agent2:
     build:
       context: ./wazuh-agent
-    image: wazuh-agent-centos:3.10
+    image: wazuh-agent-centos:last-stable
     entrypoint: 
       - /scripts/entrypoint.sh
       - wazuh-master
